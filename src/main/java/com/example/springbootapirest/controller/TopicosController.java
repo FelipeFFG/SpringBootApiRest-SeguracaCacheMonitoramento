@@ -30,7 +30,6 @@ import java.util.Optional;
 @RequestMapping("/topicos")
 public class TopicosController {
 
-
     @Autowired
     private TopicoRepository topicoRepository;
 
@@ -50,7 +49,6 @@ public class TopicosController {
         }
     }
 
-
     @PostMapping
     @Transactional
     @CacheEvict(value = "listaDeTopicos",allEntries = true)
@@ -63,7 +61,6 @@ public class TopicosController {
         return ResponseEntity.created(uri).body(new TopicoDto(topico));
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<DetalhesDoTopicoDto> detalhar(@PathVariable Long id){
         Optional<Topico> topico = topicoRepository.findById(id);
@@ -73,8 +70,6 @@ public class TopicosController {
         return ResponseEntity.notFound().build();
 
     }
-
-
 
     @PutMapping("/{id}")
     @Transactional
@@ -87,7 +82,6 @@ public class TopicosController {
         }
         return ResponseEntity.notFound().build();
     }
-
 
     @DeleteMapping("/{id}")
     @Transactional
