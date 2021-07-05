@@ -8,6 +8,7 @@ import com.example.springbootapirest.model.Topico;
 import com.example.springbootapirest.repository.CursoRepository;
 import com.example.springbootapirest.repository.TopicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -35,8 +36,9 @@ public class TopicosController {
     @Autowired
     private CursoRepository cursoRepository;
 
-    @GetMapping                                                                     //numero da pagina //quantidade de itens por pagina
-    public Page<TopicoDto> lista(@RequestParam(required = false) String nomeCurso,
+    @GetMapping
+    @Cacheable(value = "listaDeTopicos")  //sinaliza que o motedo a agora esta sendo cacheado e passamos o value, que vai ser um id do cache para a aplicacao
+    public Page<TopicoDto> lista(@RequestParam(required = false) String nomeCurso, //numero da pagina //quantidade de itens por pagina
                                 @PageableDefault(sort = "id",direction = Sort.Direction.DESC,page=0,size=10) Pageable paginacao){         //required = true (obrigatorio passar como parametro.)
 
 
