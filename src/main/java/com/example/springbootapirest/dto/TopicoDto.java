@@ -1,6 +1,7 @@
 package com.example.springbootapirest.dto;
 
 import com.example.springbootapirest.model.Topico;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,8 +22,8 @@ public class TopicoDto {
         this.dataCriacao = topico.getDataCriacao();
     }
 
-    public static List<TopicoDto> converter(List<Topico> topicos) {  //convertendo lista de topicos para topicosDTO.
-        return topicos.stream().map(TopicoDto::new).collect(Collectors.toList());
+    public static Page<TopicoDto> converter(Page<Topico> topicos) {  //convertendo lista de topicos para topicosDTO.
+        return topicos.map(TopicoDto::new);     //coverte os topicos em topicosDTO.
 
     }
 

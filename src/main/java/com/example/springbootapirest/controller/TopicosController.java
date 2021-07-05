@@ -8,6 +8,10 @@ import com.example.springbootapirest.model.Topico;
 import com.example.springbootapirest.repository.CursoRepository;
 import com.example.springbootapirest.repository.TopicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -30,13 +34,18 @@ public class TopicosController {
     @Autowired
     private CursoRepository cursoRepository;
 
-    @GetMapping
-    public List<TopicoDto> lista(String nomeCurso){
+    @GetMapping                                                                     //numero da pagina //quantidade de itens por pagina
+    public Page<TopicoDto> lista(@RequestParam(required = false) String nomeCurso,
+                                 @RequestParam(required = true) int pagina,
+                                 @RequestParam(required = true) int qtd,
+                                 @RequestParam(required = true)String ordenacao){         //required = true (obrigatorio passar como parametro.)
+
+        Pageable pagincao= PageRequest.of(pagina,qtd, Sort.Direction.DESC,ordenacao);
         if (nomeCurso==null){
-            List<Topico> topicos = topicoRepository.findAll();
+            Page<Topico> topicos = topicoRepository.findAll(pagincao);
             return TopicoDto.converter(topicos);
         }else{
-            List<Topico> topicos = topicoRepository.findByCurso_Nome(nomeCurso);  //filtra os topicos que tiverem o nome do curso igual o passado na url.
+            Page<Topico> topicos = topicoRepository.findByCurso_Nome(nomeCurso,pagincao);  //filtra os topicos que tiverem o nome do curso igual o passado na url.
             return TopicoDto.converter(topicos);
         }
     }
