@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -36,16 +37,14 @@ public class TopicosController {
 
     @GetMapping                                                                     //numero da pagina //quantidade de itens por pagina
     public Page<TopicoDto> lista(@RequestParam(required = false) String nomeCurso,
-                                 @RequestParam(required = true) int pagina,
-                                 @RequestParam(required = true) int qtd,
-                                 @RequestParam(required = true)String ordenacao){         //required = true (obrigatorio passar como parametro.)
+                                @PageableDefault(sort = "id",direction = Sort.Direction.DESC,page=0,size=10) Pageable paginacao){         //required = true (obrigatorio passar como parametro.)
 
-        Pageable pagincao= PageRequest.of(pagina,qtd, Sort.Direction.DESC,ordenacao);
+
         if (nomeCurso==null){
-            Page<Topico> topicos = topicoRepository.findAll(pagincao);
+            Page<Topico> topicos = topicoRepository.findAll(paginacao);
             return TopicoDto.converter(topicos);
         }else{
-            Page<Topico> topicos = topicoRepository.findByCurso_Nome(nomeCurso,pagincao);  //filtra os topicos que tiverem o nome do curso igual o passado na url.
+            Page<Topico> topicos = topicoRepository.findByCurso_Nome(nomeCurso,paginacao);  //filtra os topicos que tiverem o nome do curso igual o passado na url.
             return TopicoDto.converter(topicos);
         }
     }
