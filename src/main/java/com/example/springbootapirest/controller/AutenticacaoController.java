@@ -2,6 +2,7 @@ package com.example.springbootapirest.controller;
 
 
 import com.example.springbootapirest.config.security.TokenService;
+import com.example.springbootapirest.dto.TokenDto;
 import com.example.springbootapirest.form.LoginForm;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +30,13 @@ public class AutenticacaoController {
     private TokenService tokenService;
 
     @PostMapping
-    public ResponseEntity<?> autenticar(@RequestBody @Valid LoginForm form){
+    public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid LoginForm form){
         UsernamePasswordAuthenticationToken dadosLogin = form.converter();
         try{
             Authentication authentication =authenticationManager.authenticate(dadosLogin);  //Spring vai olhar as configuracao e vai chamar a
                                             // autentication service, que chama o usuario repository e consulta os dados no banco de dados.
             String token = tokenService.gerarToken(authentication);
-            System.out.println(token);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(new TokenDto(token,"Bearer"));
         }catch (AuthenticationException e){
             return ResponseEntity.badRequest().build();
         }
