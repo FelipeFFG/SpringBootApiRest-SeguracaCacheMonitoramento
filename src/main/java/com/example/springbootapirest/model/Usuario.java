@@ -79,6 +79,11 @@ public class Usuario implements UserDetails {  //Implements UserDetail, diz para
 		this.senha = senha;
 	}
 
+
+	public void setPerfis(List<Perfil> perfis) {
+		this.perfis = perfis;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return this.perfis;

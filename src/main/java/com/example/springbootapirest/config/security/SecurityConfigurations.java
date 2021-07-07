@@ -2,6 +2,7 @@ package com.example.springbootapirest.config.security;
 
 
 import antlr.Token;
+import com.example.springbootapirest.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +28,8 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {      
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @Override
     @Bean
@@ -53,7 +56,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {      
                 .anyRequest().authenticated()  //qualquer outra requisicao o usuario deve estar autenticado.
                 .and().csrf().disable()   //csrf- contra ataque hack, porem como vamos usar o token, nao precisamos deixar habilitadado, pois o token ja nos protege contra este tipo de ataque.
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //nao é pra criar sessao, pois iremos usar token.
-                .and().addFilterBefore(new AutenticacaoViaTokenFilter(tokenService), UsernamePasswordAuthenticationFilter.class);
+                .and().addFilterBefore(new AutenticacaoViaTokenFilter(tokenService,usuarioRepository), UsernamePasswordAuthenticationFilter.class);
     }
 
     //configuracaoes de recursos estaticos(js,css,imagens,etc..)

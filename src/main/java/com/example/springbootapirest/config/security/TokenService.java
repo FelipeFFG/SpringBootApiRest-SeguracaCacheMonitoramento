@@ -2,6 +2,7 @@ package com.example.springbootapirest.config.security;
 
 
 import com.example.springbootapirest.model.Usuario;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,5 +45,10 @@ public class TokenService {
         }catch (Exception e){
             return false;
         }
+    }
+
+    public Long getIdUsuario(String token) {
+        Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();  //retorna o objeto do token
+        return Long.parseLong(claims.getSubject());  //Transformando o Claims em um Long
     }
 }
