@@ -1,4 +1,4 @@
-package com.example.springbootapirest.form;
+package com.example.springbootapirest.controller.form;
 
 import com.example.springbootapirest.model.Curso;
 import com.example.springbootapirest.model.Topico;

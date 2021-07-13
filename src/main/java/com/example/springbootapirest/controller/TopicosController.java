@@ -1,9 +1,9 @@
 package com.example.springbootapirest.controller;
 
-import com.example.springbootapirest.dto.DetalhesDoTopicoDto;
-import com.example.springbootapirest.dto.TopicoDto;
-import com.example.springbootapirest.form.AtualizacaoTopicoForm;
-import com.example.springbootapirest.form.TopicoForm;
+import com.example.springbootapirest.controller.dto.DetalhesDoTopicoDto;
+import com.example.springbootapirest.controller.dto.TopicoDto;
+import com.example.springbootapirest.controller.form.AtualizacaoTopicoForm;
+import com.example.springbootapirest.controller.form.TopicoForm;
 import com.example.springbootapirest.model.Topico;
 import com.example.springbootapirest.repository.CursoRepository;
 import com.example.springbootapirest.repository.TopicoRepository;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -22,7 +21,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 //Por padrao ele assume que todos os metodos tem o @ReponseBody.

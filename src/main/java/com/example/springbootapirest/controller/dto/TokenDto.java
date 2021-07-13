@@ -1,4 +1,4 @@
-package com.example.springbootapirest.dto;
+package com.example.springbootapirest.controller.dto;
 
 public class TokenDto {
 

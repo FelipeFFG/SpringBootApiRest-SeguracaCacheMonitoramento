@@ -1,6 +1,5 @@
-package com.example.springbootapirest.dto;
+package com.example.springbootapirest.controller.dto;
 
-import com.example.springbootapirest.model.Resposta;
 import com.example.springbootapirest.model.StatusTopico;
 import com.example.springbootapirest.model.Topico;
 

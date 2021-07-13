@@ -1,4 +1,4 @@
-package com.example.springbootapirest.form;
+package com.example.springbootapirest.controller.form;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 

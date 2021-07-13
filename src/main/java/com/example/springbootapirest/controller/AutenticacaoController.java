@@ -2,9 +2,8 @@ package com.example.springbootapirest.controller;
 
 
 import com.example.springbootapirest.config.security.TokenService;
-import com.example.springbootapirest.dto.TokenDto;
-import com.example.springbootapirest.form.LoginForm;
-import org.apache.coyote.Response;
+import com.example.springbootapirest.controller.dto.TokenDto;
+import com.example.springbootapirest.controller.form.LoginForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

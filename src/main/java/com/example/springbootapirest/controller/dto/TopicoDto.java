@@ -1,11 +1,9 @@
-package com.example.springbootapirest.dto;
+package com.example.springbootapirest.controller.dto;
 
 import com.example.springbootapirest.model.Topico;
 import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class TopicoDto {
 

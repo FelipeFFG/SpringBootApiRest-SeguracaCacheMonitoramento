@@ -54,6 +54,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {      
                 .antMatchers(HttpMethod.GET,"/topicos/*").permitAll() //requisicoes get para /topicos/algumacoisa, está liberado para todos.
                 .antMatchers(HttpMethod.POST,"/auth").permitAll()     //liberando para qualquer pessoa poder acessar a pagina de login.
                 .antMatchers(HttpMethod.GET,"/actuator/**").permitAll()
+                .antMatchers(HttpMethod.DELETE,"/topicos/*").hasRole("MODERADOR")       //Autorizacao baseada no perfil do usuario.Para apenas moderador poder deletar.
                 .anyRequest().authenticated()  //qualquer outra requisicao o usuario deve estar autenticado.
                 .and().csrf().disable()   //csrf- contra ataque hack, porem como vamos usar o token, nao precisamos deixar habilitadado, pois o token ja nos protege contra este tipo de ataque.
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //nao é pra criar sessao, pois iremos usar token.
